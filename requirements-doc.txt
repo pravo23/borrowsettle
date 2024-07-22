@@ -1,0 +1,82 @@
+Users:
+
+Vendor - who is lending it.
+Customer - who owes
+
+
+Functional Requirement -
+
+Both types of User can register & login.
+
+Vendor (Privileged User):
+add new new customer
+update the customer
+delete the customer (make it inactive)
+get the customer
+get all active customers
+create a schedule order/contract in collaboration with customers. (any update require confirmation from the relevant customer, by notification or push)
+schedule order can be marked inactive. (can give option to delete completely) (update/delete)
+get all scheduled orders (active/inactive) per month ( for a particular customer)
+get details of any particular schedule.
+mark attendance everyday - This would create new record/order in the system
+The order would have an option to comment on.  (CRUD)
+settle the records.
+Vendor shall see the item, quantity and amount (When click on active order)
+can accept custom/ondemand orders.
+can see how much he owes to customer
+
+Customer:
+update the attendance.
+settle the records only after payment.
+see the record/orders of the current month. (for scheduled orders)
+shall see the item, quantity and amount  (When click on active order)
+comment on the order. (CRUD)
+request custom/ondemand order (CRUD)
+can see how much he owes to a vendor
+
+
+Non Functional Requirement -
+10k customers
+API Layer:
+
+POST - v1/register
+POST - v1/login
+POST - v1/customers
+GET - v1/customers
+Delete - v1/customer/:customerId
+PUT - v1/customer/:customerId
+POST - v1/orders [customorders/scheduledordes]
+GET - v1/orders
+PUT - v1/order:/orderId
+POST - v1/records [Internal] - may be partner can create
+Delete - v1/order/:orderId
+POST - v1/order/:orderId/attendance (This would trigger the new the new record creation)
+PUT - v1/order/:record/attendance
+POST - v1/finance/customer/month/:customerId
+POST - v1/finance/vendor/month/:vendorId
+CRUD - v1/comments
+
+Authentication and role management needs to be handled
+
+note - custom order, comment can skip for now
+
+Data Layer:
+
+User - (name, phone_number, email, address (optional), user_type_id)
+User Type - (customer, vendor)
+order (Id, partnerId, CustomerId, item_name, amount, rate, valid_till, status, order_type)
+order Type (scheduled, on-demand)
+record (order_id, date, status, updated_by, updated_at)
+custom_record (customer_id, date, statue, updated_by, updated_at, quantity, rate, item_name)
+cumulative_record_details (order_id, month, total_amount, active days count, quantity)
+comment (user_id, record_id, content)
+
+
+Access Pattern - Important
+
+write record in db
+write order in db
+read monthly total number of amount, days active, quantity delivered.
+fetch details for a customer
+fetch details for a partner
+
