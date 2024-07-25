@@ -1,0 +1,1 @@
+An application to borrow & settle the transaction weekly/monthly
