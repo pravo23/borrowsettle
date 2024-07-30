@@ -4,5 +4,5 @@ import "fmt"
 
 func main() {
 
-	fmt.Println("app for borrow and settle the transaction")
+	fmt.Println("app for borrow and settle the transaction!")
 }
